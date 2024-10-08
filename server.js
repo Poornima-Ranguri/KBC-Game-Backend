@@ -21,8 +21,6 @@ app.use(cors());
 
 let database = null;
 
-const port = process.env.PORT || 5000;
-
 const initializeDbAndServer = async () => {
   try {
     database = await open({
@@ -30,8 +28,8 @@ const initializeDbAndServer = async () => {
       driver: sqlite3.Database,
     });
 
-    app.listen(port, () =>
-      console.log("Server Running at http://localhost:5000/")
+    app.listen(8000, () =>
+      console.log("Server Running at http://localhost:8000/")
     );
   } catch (error) {
     console.log(`DB Error: ${error.message}`);
@@ -78,7 +76,7 @@ app.post("/add-user", async (request, response) => {
 app.put("/update-status", async (request, response) => {
   const { username, questions_attempted, completedAllQuestions } = request.body;
 
-  // Ensure `completedAllQuestions` is treated as a boolean in the SQL query
+  // Ensure completedAllQuestions is treated as a boolean in the SQL query
   const updateUserQuery = `
         UPDATE userTable 
         SET questions_attempted = ${questions_attempted}, 
