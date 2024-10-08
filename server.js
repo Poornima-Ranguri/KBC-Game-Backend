@@ -21,6 +21,8 @@ app.use(cors());
 
 let database = null;
 
+const port = process.env.PORT || 5000;
+
 const initializeDbAndServer = async () => {
   try {
     database = await open({
@@ -28,8 +30,8 @@ const initializeDbAndServer = async () => {
       driver: sqlite3.Database,
     });
 
-    app.listen(3003, () =>
-      console.log("Server Running at http://localhost:3003/")
+    app.listen(port, () =>
+      console.log("Server Running at http://localhost:5000/")
     );
   } catch (error) {
     console.log(`DB Error: ${error.message}`);
